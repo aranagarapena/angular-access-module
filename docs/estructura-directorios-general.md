@@ -5,26 +5,22 @@
 angular-access-module/
 │── src/
 │   ├── app/
-│   │   ├── core/               → 📌 Módulo central con configuraciones globales
+│   │   ├── core/               → 📌 Configuraciones globales y servicios
 │   │   │   ├── components/
 │   │   │   ├── services/
 │   │   │   ├── guards/
-│   │   │   ├── core.module.ts
-│   │   ├── shared/             → 📌 Módulo de elementos reutilizables
+│   │   ├── shared/             → 📌 Elementos reutilizables
 │   │   │   ├── components/
 │   │   │   ├── directives/
 │   │   │   ├── pipes/
-│   │   │   ├── shared.module.ts
 │   │   ├── modules/             → 📌 Módulos funcionales
 │   │   │   ├── access/         → 📌 Módulo de autenticación y acceso
-│   │   │   ├── otros-modulos/   → 📌 Espacio para futuras implementaciones
 │   │   ├── pages/              → 📌 Páginas principales del sistema
 │   │   │   ├── welcome/
 │   │   │   │   ├── welcome.component.ts
-│   │   │   ├── pages.module.ts
 │   │   ├── app.component.ts     → Componente raíz
-│   │   ├── app-routing.module.ts → Enrutamiento principal
-│   │   ├── app.module.ts        → Módulo principal
+│   │   ├── app.config.ts        → Configuración de la aplicación standalone
+│   │   ├── main.ts              → Punto de entrada de la aplicación
 ```
 
 ## **📌 Descripción de los Módulos**
@@ -51,4 +47,5 @@ angular-access-module/
 - **`WelcomeComponent`** → Página de bienvenida.
 
 ---
-📌 **Esta estructura está diseñada para ser modular y escalable, facilitando la reutilización del código en futuros proyectos.** 🚀
+📌 **Esta estructura está optimizada para proyectos Standalone en Angular, eliminando la dependencia de `NgModules` y facilitando la escalabilidad.** 🚀
+

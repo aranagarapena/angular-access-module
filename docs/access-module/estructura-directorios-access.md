@@ -21,8 +21,6 @@ modules/
     │   ├── access.service.ts       → 📌 Lógica de autenticación (login/logout)
     ├── guards/                     → 📌 Protección de rutas privadas
     │   ├── access.guard.ts
-    ├── access.module.ts             → 📌 Módulo de acceso
-    ├── access-routing.module.ts     → 📌 Rutas del módulo de acceso
 ```
 
 ## **📌 Descripción de los Componentes**
@@ -63,4 +61,5 @@ modules/
 ✅ **Propósito:** Restringe el acceso a ciertas rutas si el usuario no está autenticado.
 
 ---
-📌 **Esta estructura permite que el módulo de acceso sea reutilizable y escalable para diferentes aplicaciones.** 🚀
+📌 **Esta estructura está adaptada a un proyecto Standalone en Angular, eliminando la necesidad de `NgModules` y facilitando la reutilización.** 🚀
+
