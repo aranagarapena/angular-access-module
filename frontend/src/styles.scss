@@ -1,0 +1,17 @@
+// 🎨 Paleta de colores (inspirada en Markdown)
+$primary-color: #24292e;  // Color de texto principal
+$secondary-color: #0366d6; // Azul para botones/enlaces
+$background-color: #f6f8fa; // Fondo claro
+$navbar-background: #ffffff; // Fondo de la barra de navegación
+$border-color: #d1d5da; // Bordes sutiles
+
+// 🖋️ Tipografía
+$font-family: "Inter", "Consolas", "Menlo", "Monospace", sans-serif;
+
+body {
+  font-family: $font-family;
+  background-color: $background-color;
+  color: $primary-color;
+  margin: 0;
+  padding: 0;
+}

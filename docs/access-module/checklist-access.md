@@ -2,9 +2,7 @@
 
 ## 🔹 Estructura del Proyecto
 - [ ] Crear la estructura de carpetas del proyecto
-- [ ] Crear el módulo `access/`
-- [ ] Crear el módulo `pages/`
-- [ ] Configurar el enrutamiento en `app-routing.module.ts`
+
 
 ## 🔹 Barra de Navegación
 - [ ] Crear `NavbarComponent`
