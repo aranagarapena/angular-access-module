@@ -1,0 +1,19 @@
+<div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <div class="modal-header">
+        <button (click)="toggleView('login')" [class.active]="isLogin">Inicio de Sesión</button>
+        <button (click)="toggleView('register')" [class.active]="!isLogin">Regístrate</button>
+        <span class="close-btn" (click)="closeModal()">✖</span>
+      </div>
+      
+      <div class="modal-body">
+        <!-- <app-login-form *ngIf="isLogin"></app-login-form>
+        <app-register-form *ngIf="!isLogin"></app-register-form> -->
+      </div>
+  
+      <div class="modal-footer">
+        <button class="guest-btn" (click)="continueAsGuest()">Seguir como invitado</button>
+      </div>
+    </div>
+  </div>
+  
