@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -7,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+
+  @Output() openModal = new EventEmitter<void>();
+
+  onOpenModal() {
+    console.log("🔹 Botón de usuario clicado: Emitiendo evento `openModal`");
+    this.openModal.emit();
+  }
+
 
 }

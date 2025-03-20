@@ -1,3 +1,4 @@
-<app-navbar></app-navbar>
-<app-access-modal></app-access-modal>
+<app-navbar (openModal)="openModal()"></app-navbar>
+<app-access-modal *ngIf="isModalOpen" (close)="isModalOpen = false"></app-access-modal>
+
 <router-outlet></router-outlet>
