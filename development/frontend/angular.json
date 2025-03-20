@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular-access-module",
+            "outputPath": "../../dist",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -33,20 +33,8 @@
           },
           "configurations": {
             "production": {
-              "outputPath": "dist",
+              "outputPath": "../../dist",
               "baseHref": "/angular-access-module/",
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
-                }
-              ],
               "outputHashing": "all"
             },
             "development": {
