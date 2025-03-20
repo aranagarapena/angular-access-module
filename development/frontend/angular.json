@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "../../dist",
+            "outputPath": "../../docs",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -33,7 +33,7 @@
           },
           "configurations": {
             "production": {
-              "outputPath": "../../dist",
+              "outputPath": "../../docs",
               "baseHref": "/angular-access-module/",
               "outputHashing": "all"
             },
