@@ -68,5 +68,29 @@
         cursor: not-allowed;
       }
     }
+
+    .checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+
+  input[type='checkbox'] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+  }
+
+  a {
+    color: #007bff;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #0056b3;
+    }
+  }
+}
+
   }
   
