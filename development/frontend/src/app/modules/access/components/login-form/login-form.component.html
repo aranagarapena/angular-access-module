@@ -1,0 +1,14 @@
+<form class="login-form" (ngSubmit)="onSubmit()" #form="ngForm">
+    <label>
+      Usuario o Correo Electrónico
+      <input type="text" name="username" [(ngModel)]="username" required />
+    </label>
+  
+    <label>
+      Contraseña
+      <input type="password" name="password" [(ngModel)]="password" required />
+    </label>
+  
+    <button type="submit" [disabled]="form.invalid">Iniciar Sesión</button>
+  </form>
+  
