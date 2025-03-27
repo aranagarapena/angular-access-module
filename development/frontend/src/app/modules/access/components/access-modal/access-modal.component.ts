@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { CommonModule } from '@angular/common';
+import { RegisterFormComponent } from '../register-form/register-form.component';
 
 @Component({
   selector: 'app-access-modal',
   standalone: true,
-  imports: [LoginFormComponent, CommonModule],
+  imports: [LoginFormComponent, CommonModule, RegisterFormComponent],
   templateUrl: './access-modal.component.html',
   styleUrls: ['./access-modal.component.scss']
 })
