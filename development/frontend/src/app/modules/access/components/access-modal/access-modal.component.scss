@@ -12,10 +12,13 @@
   
   .modal-content {
     background: white;
-    width: 400px;
-    padding: 20px;
+    width: 90%;
+    max-width: 480px;
+    max-height: 90vh; /* 🔹 limite vertical */
+    padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-y: auto; /* 🔹 scroll interno si se desborda */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     text-align: center;
   }
   

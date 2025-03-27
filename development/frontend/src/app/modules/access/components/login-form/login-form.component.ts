@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-login-form',
   imports: [FormsModule],
   templateUrl: './login-form.component.html',
-  styleUrl: './login-form.component.css'
+  styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent {
   username: string = '';
