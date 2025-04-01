@@ -1,88 +1,161 @@
 <form class="register-form" (ngSubmit)="onSubmit()" #form="ngForm">
-    <!-- Obligatorios -->
-    <label>
-      Nombre
-      <input type="text" name="nombre" [(ngModel)]="nombre" required />
-    </label>
-  
+  <!-- Campo: Nombre -->
+  <label>
+    Nombre
+    <input type="text" name="nombre" [(ngModel)]="registerFormData.nombre" required #nombre="ngModel" />
+    <span *ngIf="nombre.invalid && nombre.touched" class="error">Este campo es obligatorio.</span>
+  </label>
+    <!-- Campo: Apellidos -->
     <label>
       Primer Apellido
-      <input type="text" name="apellido1" [(ngModel)]="apellido1" required />
+      <input type="text" name="apellido1" [(ngModel)]="registerFormData.apellido1" required #apellido1="ngModel" />
+      <span *ngIf="apellido1.invalid && apellido1.touched" class="error">Este campo es obligatorio.</span>
     </label>
-  
+    
     <label>
       Segundo Apellido
-      <input type="text" name="apellido2" [(ngModel)]="apellido2" required />
+      <input type="text" name="apellido2" [(ngModel)]="registerFormData.apellido2" required #apellido2="ngModel" />
+      <span *ngIf="apellido2.invalid && apellido2.touched" class="error">Este campo es obligatorio.</span>
     </label>
-  
+    <!-- Tipo de Documento -->
     <label>
-      DNI
-      <input type="text" name="dni" [(ngModel)]="dni" required />
-    </label>
-  
-    <label>
-      Teléfono
-      <input type="tel" name="telefono" [(ngModel)]="telefono" required />
-    </label>
-  
-    <label>
-      Correo Electrónico
-      <input type="email" name="email" [(ngModel)]="email" required />
-    </label>
-  
-    <label>
-      Contraseña
-      <input type="password" name="password" [(ngModel)]="password" required />
-    </label>
-  
-    <label>
-      Repetir Contraseña
-      <input type="password" name="repeatPassword" [(ngModel)]="repeatPassword" required />
-    </label>
-  
-    <!-- Opcionales -->
-    <hr />
-    <label>
-      Ciudad de Residencia
-      <input type="text" name="ciudad" [(ngModel)]="ciudad" />
-    </label>
-  
-    <label>
-      Código Postal
-      <input type="text" name="cp" [(ngModel)]="cp" />
-    </label>
-  
-    <label>
-      Dirección
-      <input type="text" name="direccion" [(ngModel)]="direccion" />
-    </label>
-  
-    <label>
-      Fecha de Nacimiento
-      <input type="date" name="fechaNacimiento" [(ngModel)]="fechaNacimiento" />
-    </label>
-  
-    <label>
-      Género
-      <select name="genero" [(ngModel)]="genero">
-        <option value="" disabled selected>Selecciona una opción</option>
-        <option value="masculino">Masculino</option>
-        <option value="femenino">Femenino</option>
-        <option value="otro">Otro</option>
-        <option value="no-decirlo">Prefiero no decirlo</option>
+      Tipo de Documento
+      <select name="tipoDocumento" [(ngModel)]="registerFormData.tipoDocumento" required>
+        <option value="dni">DNI</option>
+        <option value="pasaporte">Pasaporte</option>
       </select>
     </label>
-  
+    <!-- Campo de Identificación -->
     <label>
-      Sector o Industria
-      <input type="text" name="sector" [(ngModel)]="sector" />
-    </label>
+      Número de Identificación
+      <input
+        type="text"
+        name="identificacion"
+        [(ngModel)]="registerFormData.identificacion"
+        required
+        #identificacion="ngModel"
+      />
+      <span *ngIf="identificacion.errors?.['required'] && identificacion.touched" class="error">Este campo es obligatorio.</span>
+      
+      <span
+        *ngIf="!identificacion.errors?.['required'] && identificacion.touched && !validateIdentificacion()" class="error">{{ registerFormData.tipoDocumento === 'dni' ? 'DNI no válido.' : 'Pasaporte no válido.' }}</span>
+      
+</label>
+
+<div class="phone-row">
+  <label>
+    Prefijo
+    <select name="prefijo" [(ngModel)]="registerFormData.prefijo" required>
+      <option value="+34">+34</option>
+      <option value="+33">+33</option>
+      <option value="+49">+49</option>
+      <option value="+1">+1</option>
+      <!-- Añade más si lo necesitas -->
+    </select>
+  </label>
+
+  <label>
+    Teléfono
+    <input
+      type="tel"
+      name="telefono"
+      [(ngModel)]="registerFormData.telefono"
+      required
+      pattern="[0-9]{9}"
+      #telefono="ngModel"
+    />
+    <span *ngIf="telefono.errors?.['required'] && telefono.touched" class="error">
+      Este campo es obligatorio.
+    </span>
+    <span *ngIf="telefono.errors?.['pattern'] && telefono.touched" class="error">
+      Debe contener exactamente 9 dígitos.
+    </span>
+  </label>
+</div>
+
+<label>
+  Correo Electrónico
+  <input
+    type="email"
+    name="email"
+    [(ngModel)]="registerFormData.email"
+    required
+    email
+    #email="ngModel"
+  />
+  <span *ngIf="email.errors?.['required'] && email.touched" class="error">
+    Este campo es obligatorio.
+  </span>
+  <span *ngIf="email.errors?.['email'] && email.touched" class="error">
+    Correo electrónico no válido.
+  </span>
+</label>
+
+  <!-- Campo: Contraseña -->
+  <label>
+    Contraseña
+    <input type="password" name="password" [(ngModel)]="registerFormData.password" required minlength="8" #password="ngModel" />
+    <span *ngIf="password.errors?.['required'] && password.touched" class="error">Este campo es obligatorio.</span>
+    <span *ngIf="password.errors?.['minlength'] && password.touched" class="error">Mínimo 8 caracteres.</span>
+  </label>
+
+  <!-- Campo: Repetir Contraseña -->
+  <label>
+    Repetir Contraseña
+    <input type="password" name="repeatPassword" [(ngModel)]="registerFormData.repeatPassword" required #repeatPassword="ngModel" />
+    <span *ngIf="repeatPassword.touched && registerFormData.password !== registerFormData.repeatPassword" class="error">
+      Las contraseñas no coinciden.
+    </span>
+  </label>
+
+  <!-- Opcionales -->
+  <hr />
+
+  <label>
+    Ciudad
+    <input type="text" name="ciudad" [(ngModel)]="registerFormData.ciudad" />
+  </label>
+
+  <label>
+    Código Postal
+    <input type="text" name="cp" [(ngModel)]="registerFormData.cp" />
+  </label>
+
+  <label>
+    Dirección
+    <input type="text" name="direccion" [(ngModel)]="registerFormData.direccion" />
+  </label>
+
+  <label>
+    Fecha de Nacimiento
+    <input type="date" name="fechaNacimiento" [(ngModel)]="registerFormData.fechaNacimiento" />
+  </label>
+
+  <label>
+    Género
+    <select name="genero" [(ngModel)]="registerFormData.genero">
+      <option value="" disabled selected>Selecciona una opción</option>
+      <option value="masculino">Masculino</option>
+      <option value="femenino">Femenino</option>
+      <option value="otro">Otro</option>
+      <option value="no-decirlo">Prefiero no decirlo</option>
+    </select>
+  </label>
+
+  <label>
+    Sector o Industria
+    <input type="text" name="sector" [(ngModel)]="registerFormData.sector" />
+  </label>
+
+  <!-- Términos -->
+  <label class="checkbox">
+    <input type="checkbox" name="terminos" [(ngModel)]="registerFormData.terminos" required />
+    Acepto los <a href="assets/terminos.pdf" target="_blank">términos y condiciones</a>
+  </label>
+
+  <span *ngIf="!registerFormData.terminos && form.submitted" class="error">Debes aceptar los términos.</span>
+
   
-    <label class="checkbox">
-      <input type="checkbox" name="terminos" [(ngModel)]="terminos" required />
-      Acepto los <a href="assets/terminos.pdf" target="_blank">términos y condiciones</a>
-    </label>
-  
-    <button type="submit" [disabled]="form.invalid">Registrarse</button>
-  </form>
+  <button type="submit" [disabled]="form.invalid">Registrarse</button>
+</form>
   
