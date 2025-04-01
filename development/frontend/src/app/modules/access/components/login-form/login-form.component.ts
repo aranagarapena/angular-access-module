@@ -1,19 +1,27 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { LoginRequestModel } from '../../interfaces/login-request.model';
+import { CommonModule } from '@angular/common'; // ✅ Añadir esto
 
 @Component({
   selector: 'app-login-form',
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   standalone: true,
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent {
-  username: string = '';
-  password: string = '';
+
+  loginData: LoginRequestModel = {
+    usernameOrEmail: '',
+    password: ''
+  };
+
 
   onSubmit() {
-    console.log('Iniciar sesión con:', this.username, this.password);
-    // Aquí se podrá añadir autenticación real más adelante
+    if (!this.loginData.usernameOrEmail || !this.loginData.password) return;
+
+    // Aquí enviarás al backend
+    console.log('Datos listos para enviar:', this.loginData);
   }
 }

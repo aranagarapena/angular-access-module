@@ -1,12 +1,16 @@
-<form class="login-form" (ngSubmit)="onSubmit()" #form="ngForm">
+<form class="login-form" (ngSubmit)="onSubmit()" #form="ngForm" novalidate>
     <label>
       Usuario o Correo Electrónico
-      <input type="text" name="username" [(ngModel)]="username" required />
-    </label>
+      <input type="text" name="username" [(ngModel)]="loginData.usernameOrEmail" required #username="ngModel"/>
+      <span *ngIf="username.invalid && username.touched" class="error">Este campo es obligatorio.</span>    
+  </label>
   
     <label>
       Contraseña
-      <input type="password" name="password" [(ngModel)]="password" required />
+      <input type="password" name="password" [(ngModel)]="loginData.password" required minlength="8" #password="ngModel"/>
+      <span *ngIf="password.errors?.['required'] && password.touched" class="error">Este campo es obligatorio.</span>
+      <span *ngIf="password.errors?.['minlength'] && password.touched" class="error">La contraseña debe tener al menos 8 caracteres.</span>
+    
     </label>
   
     <button type="submit" [disabled]="form.invalid">Iniciar Sesión</button>

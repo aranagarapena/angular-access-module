@@ -55,4 +55,10 @@
       cursor: not-allowed;
     }
   }
+
+  .error {
+    color: #d93025; // rojo suave de error tipo Google
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+  }
 }
