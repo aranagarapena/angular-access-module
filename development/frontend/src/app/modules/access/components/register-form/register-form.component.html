@@ -81,8 +81,12 @@
         <span *ngIf="telefono.errors?.['required'] && telefono.touched" class="error">
           Este campo es obligatorio.
         </span>
-        <span *ngIf="telefono.errors?.['pattern'] && telefono.touched" class="error">
-          Debe contener exactamente 9 dígitos.
+        <span *ngIf="telefono.touched && !validateTelefono()" class="error">
+          {{
+            registerFormData.prefijo === '+34'
+              ? 'Número no válido. Debe empezar por 6, 7 o 9 y tener 9 dígitos.'
+              : 'Número inválido. Debe contener 9 dígitos.'
+          }}
         </span>
       </label>
     </div>

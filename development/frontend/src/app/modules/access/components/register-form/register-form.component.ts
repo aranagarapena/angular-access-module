@@ -32,25 +32,50 @@ export class RegisterFormComponent {
     terminos: false
   };
 
+  validateTelefono(): boolean {
+    const { prefijo, telefono } = this.registerFormData;
+  
+    if (!telefono) return false;
+  
+    // Si es España, validar con patrón estricto
+    if (prefijo === '+34') {
+      const regex = /^[6|7|9]\d{8}$/;
+      return regex.test(telefono.trim());
+    }
+  
+    // Para otros países solo validamos que tenga 9 dígitos
+    const basicRegex = /^\d{9}$/;
+    return basicRegex.test(telefono.trim());
+  }
+  
+  
+
   validateIdentificacion(): boolean {
-    const value = this.registerFormData.identificacion.trim();
-
-    if (this.registerFormData.tipoDocumento === 'dni') {
-      const dniPattern = /^\d{8}[a-zA-Z]$/;
-      if (!dniPattern.test(value)) return false;
-      const number = parseInt(value.substring(0, 8), 10);
-      const letter = value.charAt(8).toUpperCase();
-      const letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
-      return letter === letters[number % 23];
+    const value = this.registerFormData.identificacion?.trim().toUpperCase();
+    const tipo = this.registerFormData.tipoDocumento;
+  
+    if (!value || !tipo) return false;
+  
+    if (tipo === 'dni') {
+      const dniRegex = /^\d{8}[A-Z]$/;
+      if (!dniRegex.test(value)) return false;
+  
+      const numero = parseInt(value.substring(0, 8), 10);
+      const letra = value.charAt(8);
+      const letras = 'TRWAGMYFPDXBNJZSQVHLCKE';
+      const letraEsperada = letras[numero % 23];
+  
+      return letra === letraEsperada;
     }
-
-    if (this.registerFormData.tipoDocumento === 'pasaporte') {
-      const passportPattern = /^[A-Z]{1,3}\d{6,9}$/i;
-      return passportPattern.test(value);
+  
+    if (tipo === 'pasaporte') {
+      const passportRegex = /^[A-Z]{1,3}\d{6,9}$/;
+      return passportRegex.test(value);
     }
-
+  
     return false;
   }
+  
 
   validatePassword(password: string): boolean {
     const pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&._-])[A-Za-z\d@$!%*?&._-]{8,}$/;
